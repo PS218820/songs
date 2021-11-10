@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SongController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,18 +18,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/songs', function () {
-    return view('index');
-});
-
-Route::get('/songs/{index}', function () {
-    return view('show');
-});
+Route::get('/songs', [SongController::class, 'index']);
 
 Route::get('/songs/create', function () {
     return view('create');
 });
 
-Route::get('/songs/{index}/edit', function () {
-    return view('edit');
-});
+Route::get('/songs/{urlnaam}',[SongController::class, 'show']);
+
+Route::get('/songs/{urlnaam}/edit',[SongController::class, 'edit']);
+
+Route::post('/songs', [SongController::class, 'store'])->name('songs.store');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class SongController extends Controller
 {
@@ -13,7 +14,13 @@ class SongController extends Controller
      */
     public function index()
     {
-        //
+      //$songs = ["Living on a prayer", "Nothing else matters", "Thunderstruck", "Back in black", "Ace of spades"];
+
+      //return view('index', ['songs' => $songs]);
+
+      //return view('index', ['songs' => Song::all()]);
+      $songs = \App\Models\Song::all();
+      return view ('index', ['songs' => $songs]);
     }
 
     /**
@@ -23,7 +30,8 @@ class SongController extends Controller
      */
     public function create()
     {
-        //
+
+
     }
 
     /**
@@ -34,7 +42,16 @@ class SongController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+          'title' => 'required',
+          'singer' => 'required',
+        ]);
+
+        \App\Models\Song::create($request->all());
+
+        //return redirect()->route('songs');
+        //return redirect()->route('index');
+                        //->with('success','song created successfully.');
     }
 
     /**
@@ -43,9 +60,19 @@ class SongController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($urlnaam)
     {
-        //
+      //$songs = ["Living on a prayer", "Nothing else matters", "Thunderstruck", "Back in black", "Ace of spades"];
+
+    //  if (in_array($urlnaam, $songs))
+    //  {
+    //    $urlnaam = Str::upper($urlnaam);
+
+    //    return view('show', ['urlnaam' => $urlnaam]);
+    //  } else {
+    //    return view('show', ['urlnaam' => "Geen geldig song"]);
+      //}
+      return view('show', ['song' => \App\Models\Song::find($urlnaam)]);
     }
 
     /**
@@ -54,9 +81,18 @@ class SongController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($urlnaam)
     {
-        //
+      $songs = ["Living on a prayer", "Nothing else matters", "Thunderstruck", "Back in black", "Ace of spades"];
+
+      if (in_array($urlnaam, $songs))
+      {
+        $urlnaam = Str::upper($urlnaam);
+
+        return view('edit', ['urlnaam' => $urlnaam]);
+      } else {
+        return view('edit', ['urlnaam' => "Geen geldig song"]);
+      }
     }
 
     /**
