@@ -7,9 +7,18 @@
     <title>Edit</title>
 </head>
 <body>
-      <h1>Edit</h1>
-      <p>wijzig een song</p>
-      <input name="input" type='text' id='fname' name='fname' value="<?php echo $urlnaam; ?>">
-      <button>Edit</button>
+  <form action="{{ route('songs.destroy', [$song->id])}}" method="POST">
+      @csrf
+      @method('DELETE')
+      <button type="submit">Delete</button>
+  </form>
+
+  <form action="{{ route('songs.update',[$song->id])}}" method="POST">
+        @csrf
+        @method('PUT')
+        <input type="text" name="name" value="{{ $song->title }}" placeholder="Name">
+        <textarea name="detail" placeholder="Detail">{{ $song->singer }}</textarea>
+        <button type="submit">Submit</button>
+  </form>
 </body>
 </html>

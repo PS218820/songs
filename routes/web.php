@@ -18,7 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/songs', [SongController::class, 'index']);
+Route::get('/songs', [SongController::class, 'index'])->Name('songs.index');
 
 Route::get('/songs/create', function () {
     return view('create');
@@ -29,3 +29,5 @@ Route::get('/songs/{urlnaam}',[SongController::class, 'show']);
 Route::get('/songs/{urlnaam}/edit',[SongController::class, 'edit']);
 
 Route::post('/songs', [SongController::class, 'store'])->name('songs.store');
+Route::delete('/songs/{id}', [SongController::class, 'destroy'])->name('songs.destroy');
+Route::put('/songs/{id}', [SongController::class, 'update'])->name('songs.update');
