@@ -91,11 +91,12 @@ class SongController extends Controller
     public function update(Request $request, $id)
     {
       $request->validate([
-          'title' => 'required',
-          'singer' => 'required',
+        'title' => 'required',
+        'singer' => 'required',
       ]);
 
-      $song->update($request->all());
+        Song::find($id)->update($request->except(['id', '_token']));
+        return redirect()->route('songs.index');
     }
 
     /**

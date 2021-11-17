@@ -16,8 +16,8 @@
   <form action="{{ route('songs.update',[$song->id])}}" method="POST">
         @csrf
         @method('PUT')
-        <input type="text" name="name" value="{{ $song->title }}" placeholder="Name">
-        <textarea name="detail" placeholder="Detail">{{ $song->singer }}</textarea>
+        <input type="text" name="title" value="{{ $song->title }}" placeholder="Name">
+        <textarea name="singer" placeholder="Detail">{{ $song->singer }}</textarea>
         <button type="submit">Submit</button>
   </form>
 </body>
