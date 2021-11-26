@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use App\Models\Song;
+use App\Models\Album;
 
-class SongController extends Controller
+class AlbumController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class SongController extends Controller
      */
     public function index()
     {
-      $songs = Song::all();
-      return view ('Songs.index', ['songs' => $songs]);
+      $albums = Album::all();
+      return view ('Albums.index', ['albums' => $albums]);
     }
 
     /**
@@ -26,8 +26,7 @@ class SongController extends Controller
      */
     public function create()
     {
-
-
+        return view('create');
     }
 
     /**
@@ -38,14 +37,15 @@ class SongController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-          'title' => 'required',
-          'singer' => 'required',
-        ]);
+      $request->validate([
+        'name' => 'required',
+        'year' => 'required',
+        'times_sold' => 'required',
+      ]);
 
-        \App\Models\Song::create($request->all());
+      Album::create($request->all());
 
-        return redirect()->route('songs.store');
+      return redirect()->route('albums.index');
     }
 
     /**
@@ -56,7 +56,7 @@ class SongController extends Controller
      */
     public function show($urlnaam)
     {
-      return view('Songs.show', ['song' => Song::find($urlnaam)]);
+        return view('Albums.show', ['album' => Album::find($urlnaam)]);
     }
 
     /**
@@ -67,17 +67,7 @@ class SongController extends Controller
      */
     public function edit($urlnaam)
     {
-      //$songs = ["Living on a prayer", "Nothing else matters", "Thunderstruck", "Back in black", "Ace of spades"];
-
-      //if (in_array($urlnaam, $songs))
-      //{
-        //$urlnaam = Str::upper($urlnaam);
-
-        //return view('edit', ['urlnaam' => $urlnaam]);
-      //} else {
-        //return view('edit', ['urlnaam' => "Geen geldig song"]);
-      //}
-      return view('Songs.edit', ['song' => Song::find($urlnaam)]);
+        return view('Albums.edit', ['album' => Album::find($urlnaam)]);
     }
 
     /**
@@ -90,12 +80,13 @@ class SongController extends Controller
     public function update(Request $request, $id)
     {
       $request->validate([
-        'title' => 'required',
-        'singer' => 'required',
-      ]);
+        'name' => 'required',
+        'year' => 'required',
+        'times_sold' => 'required',
+    ]);
 
-        Song::find($id)->update($request->except(['id', '_token']));
-        return redirect()->route('songs.index');
+      Album::find($id)->update($request->except(['_token', '_method']));
+      return redirect()->route('albums.index');
     }
 
     /**
@@ -106,7 +97,7 @@ class SongController extends Controller
      */
     public function destroy($id)
     {
-        Song::destroy($id);
-        return redirect()->route('songs.index');
+      Album::destroy($id);
+      return redirect()->route('albums.index');
     }
 }
