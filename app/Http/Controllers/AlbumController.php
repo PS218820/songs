@@ -54,9 +54,9 @@ class AlbumController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($urlnaam)
+    public function show($id)
     {
-        return view('Albums.show', ['album' => Album::find($urlnaam)]);
+        return view('Albums.show', ['album' => Album::find($id)]);
     }
 
     /**
@@ -65,7 +65,7 @@ class AlbumController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($urlnaam)
+    public function edit($id)
     {
         return view('Albums.edit', ['album' => Album::find($urlnaam)]);
     }

@@ -39,8 +39,8 @@ Route::get('/albums', [AlbumController::class, 'index'])->Name('albums.index');
 Route::get('/albums/create', function () {
     return view('Albums.create');
 });
-Route::get('/albums/{urlnaam}',[AlbumController::class, 'show']);
-Route::get('/albums/{urlnaam}/edit',[AlbumController::class, 'edit']);
+Route::get('/albums/{id}',[AlbumController::class, 'show']);
+Route::get('/albums/{id}/edit',[AlbumController::class, 'edit']);
 Route::post('/albums', [AlbumController::class, 'Album.store'])->name('albums.store');
 Route::delete('/albums/{id}', [AlbumController::class, 'Album.destroy'])->name('albums.destroy');
 Route::put('/albums/{id}', [AlbumController::class, 'Album.update'])->name('albums.update');
