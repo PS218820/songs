@@ -35,6 +35,8 @@
     <div class="div3">
       <p>year</p>
       <p class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">{{  $album->year }}</p>
+      <p>band</p>
+      <p class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">{{  $album->band->name }}</p>
     </div>
     <div class="div4">
       <form action="/albums">

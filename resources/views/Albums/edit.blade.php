@@ -26,17 +26,24 @@
       <h1 class="bg-red-500 text-gray-50 text-5xl">Edit</h1>
     </div>
     <div class="div2">
-      <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" action="{{ route('songs.update',[$album->id])}}" method="POST">
+      <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" action="{{ route('albums.update',[$album->id])}}" method="POST">
             @csrf
             @method('PUT')
+            <p>band</p>
+            <select name="band_id" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+              @foreach($bands as $band)
+              <option  value="{{ $band->id }}">{{ $band->name }}</option>
+              @endforeach
+            </select>
+            <br>
             <p>name</p>
-            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="name" value="{{ $album->name }}" placeholder="Name">
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="name" value="{{ $album->name }}" placeholder="name">
             <br>
             <p>year</p>
-            <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="maker" placeholder="Detail">{{ $album->year }}</textarea>
+            <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="year" placeholder="Detail" value="{{ $album->year }}">{{ $album->year }}</textarea>
             <br>
             <p>times sold</p>
-            <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="maker" placeholder="Detail">{{ $album->times_sold }}</textarea>
+            <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="times_sold" placeholder="Detail" value="{{ $album->times_sold }}">{{ $album->times_sold }}</textarea>
             <br>
             <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">Submit</button>
       </form>
@@ -46,7 +53,7 @@
       <form action="/albums">
         <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Back to home</button>
       </form>
-      <form action="{{ route('songs.destroy', [$album->id])}}" method="POST">
+      <form action="{{ route('albums.destroy', [$album->id])}}" method="POST">
           @csrf
           @method('DELETE')
           <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">Delete</button>

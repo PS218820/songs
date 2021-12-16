@@ -15,15 +15,15 @@ class CreateAlbumTable extends Migration
     {
       Schema::create('albums', function (Blueprint $table) {
           $table->id();
-          $table->integer('band_id')->unsigned();
-          $table->string('name', 100);
-          $table->integer('year')->length(4)->nullable();
-          $table->string('times_sold', 100);
-          $table->timestamps();
-
           $table->foreign('band_id')->references('id')->on('bands');
+          $table->string('name', 100);
+          $table->year('year', 4)->nullable();
+          $table->string('times_sold', 100);
+          $table->dateTime('created_at');
+          $table->dateTime('updated_at');
       });
     }
+
 
     /**
      * Reverse the migrations.

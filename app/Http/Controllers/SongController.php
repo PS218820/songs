@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Song;
+use App\Models\Album;
+use Illuminate\Database\Eloquent\Builder;
 
 class SongController extends Controller
 {
@@ -43,7 +45,7 @@ class SongController extends Controller
           'singer' => 'required',
         ]);
 
-        \App\Models\Song::create($request->all());
+        Song::create($request->all());
 
         return redirect()->route('songs.store');
     }
@@ -54,9 +56,10 @@ class SongController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($urlnaam)
+    public function show($id)
     {
-      return view('Songs.show', ['song' => Song::find($urlnaam)]);
+      $albums = Album::all();
+      return view('Songs.show', ['song' => Song::find($id)], ['albums' => $albums]);
     }
 
     /**
@@ -65,19 +68,15 @@ class SongController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($urlnaam)
+    public function edit($id)
     {
-      //$songs = ["Living on a prayer", "Nothing else matters", "Thunderstruck", "Back in black", "Ace of spades"];
+      // $albums = Album::all();
+      $song = Song::find($id);
 
-      //if (in_array($urlnaam, $songs))
-      //{
-        //$urlnaam = Str::upper($urlnaam);
-
-        //return view('edit', ['urlnaam' => $urlnaam]);
-      //} else {
-        //return view('edit', ['urlnaam' => "Geen geldig song"]);
-      //}
-      return view('Songs.edit', ['song' => Song::find($urlnaam)]);
+      $albums = Album::whereDoesntHave('songs', function (Builder $query) use ($id) {
+            $query->where('songs.id', $id);
+        })->get();
+      return view('Songs.edit', ['song'=> $song, 'albums' => $albums]);
     }
 
     /**
@@ -92,6 +91,7 @@ class SongController extends Controller
       $request->validate([
         'title' => 'required',
         'singer' => 'required',
+        'album_id' => 'required',
       ]);
 
         Song::find($id)->update($request->except(['id', '_token']));

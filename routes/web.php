@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SongController;
 use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\BandController;
+use App\Http\Controllers\SongAlbumController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,11 +26,11 @@ Route::get('/songs', [SongController::class, 'index'])->Name('songs.index');
 Route::get('/songs/create', function () {
     return view('Songs.create');
 });
-Route::get('/songs/{urlnaam}',[SongController::class, 'show']);
-Route::get('/songs/{urlnaam}/edit',[SongController::class, 'edit']);
-Route::post('/songs', [SongController::class, 'Song.store'])->name('songs.store');
-Route::delete('/songs/{id}', [SongController::class, 'Song.destroy'])->name('songs.destroy');
-Route::put('/songs/{id}', [SongController::class, 'Song.update'])->name('songs.update');
+Route::get('/songs/{id}',[SongController::class, 'show']);
+Route::get('/songs/{id}/edit',[SongController::class, 'edit']);
+Route::post('/songs', [SongController::class, 'store'])->name('songs.store');
+Route::delete('/songs/{id}', [SongController::class, 'destroy'])->name('songs.destroy');
+Route::put('/songs/{id}', [SongController::class, 'update'])->name('songs.update');
 
 
 
@@ -41,9 +42,9 @@ Route::get('/albums/create', function () {
 });
 Route::get('/albums/{id}',[AlbumController::class, 'show']);
 Route::get('/albums/{id}/edit',[AlbumController::class, 'edit']);
-Route::post('/albums', [AlbumController::class, 'Album.store'])->name('albums.store');
-Route::delete('/albums/{id}', [AlbumController::class, 'Album.destroy'])->name('albums.destroy');
-Route::put('/albums/{id}', [AlbumController::class, 'Album.update'])->name('albums.update');
+Route::post('/albums', [AlbumController::class, 'store'])->name('albums.store');
+Route::delete('/albums/{id}', [AlbumController::class, 'destroy'])->name('albums.destroy');
+Route::put('/albums/{id}', [AlbumController::class, 'update'])->name('albums.update');
 
 
 //Bands
@@ -52,8 +53,12 @@ Route::get('/bands', [BandController::class, 'index'])->Name('bands.index');
 Route::get('/bands/create', function () {
     return view('Bands.create');
 });
-Route::get('/bands/{urlnaam}',[BandController::class, 'show']);
-Route::get('/bands/{urlnaam}/edit',[BandController::class, 'edit']);
-Route::post('/bands', [BandController::class, 'Band.store'])->name('bands.store');
-Route::delete('/bands/{id}', [BandController::class, 'Band.destroy'])->name('bands.destroy');
-Route::put('/bands/{id}', [BandController::class, 'Band.update'])->name('bands.update');
+Route::get('/bands/{id}',[BandController::class, 'show']);
+Route::get('/bands/{id}/edit',[BandController::class, 'edit']);
+Route::post('/bands', [BandController::class, 'store'])->name('bands.store');
+Route::delete('/bands/{id}', [BandController::class, 'destroy'])->name('bands.destroy');
+Route::put('/bands/{id}', [BandController::class, 'update'])->name('bands.update');
+
+//SongAlbum
+Route::post('/songs/{id}/albums', [SongAlbumController::class, 'store'])->name('songsAlbum.store');
+// Route::delete('/songs/{id}', [SongAlbumController::class, 'destroy'])->name('songsAlbum.destroy');

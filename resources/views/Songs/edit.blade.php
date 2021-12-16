@@ -26,18 +26,26 @@
       <h1 class="bg-blue-500 text-gray-50 text-5xl">Edit</h1>
     </div>
     <div class="div2">
+    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" action="{{ route('songsAlbum.store',$song->id)}}" method="POST">
+          @csrf
+          <select name="album_id" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            @foreach($albums as $album)
+            <option  value="{{ $album->id }}">{{ $album->name }}</option>
+            @endforeach
+          </select>
+          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">Submit</button>
+    </form>
       <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" action="{{ route('songs.update',[$song->id])}}" method="POST">
             @csrf
             @method('PUT')
             <p>name</p>
-            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="name" value="{{ $song->title }}" placeholder="Name">
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="title" value="{{ $song->title }}" placeholder="Name">
             <br>
             <p>singer</p>
-            <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="maker" placeholder="Detail">{{ $song->singer }}</textarea>
+            <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="singer" placeholder="Detail">{{ $song->singer }}</textarea>
             <br>
             <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">Submit</button>
       </form>
-
     </div>
     <div class="div3">
       <form action="/songs">

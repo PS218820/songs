@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Album;
+use App\Models\Band;
 
 class AlbumController extends Controller
 {
@@ -16,6 +17,7 @@ class AlbumController extends Controller
     public function index()
     {
       $albums = Album::all();
+      //dd($albums);
       return view ('Albums.index', ['albums' => $albums]);
     }
 
@@ -67,7 +69,8 @@ class AlbumController extends Controller
      */
     public function edit($id)
     {
-        return view('Albums.edit', ['album' => Album::find($urlnaam)]);
+        $bands = Band::all();
+        return view('Albums.edit', ['album' => Album::find($id)], ['bands' => $bands]);
     }
 
     /**
@@ -80,10 +83,12 @@ class AlbumController extends Controller
     public function update(Request $request, $id)
     {
       $request->validate([
+        'band_id' => 'required',
         'name' => 'required',
         'year' => 'required',
         'times_sold' => 'required',
     ]);
+      // dd(Album::find($id));
 
       Album::find($id)->update($request->except(['_token', '_method']));
       return redirect()->route('albums.index');

@@ -11,4 +11,12 @@ class Song extends Model
 
     protected $table = "songs";
     protected $fillable = ['title', 'singer'];
+
+    /**
+     * Get the song that owns the album.
+     */
+    public function albums()
+    {
+        return $this->belongsToMany(Album::class);
+    }
 }

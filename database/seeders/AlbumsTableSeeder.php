@@ -16,6 +16,7 @@ class AlbumsTableSeeder extends Seeder
     public function run()
     {
       DB::table('albums')->insert([
+          'band_id' => '1',
           'name' => 'name1',
           'year' => '2021',
           'times_sold' => '69',
@@ -23,6 +24,7 @@ class AlbumsTableSeeder extends Seeder
           'updated_at' => Carbon::now()
       ]);
       DB::table('albums')->insert([
+          'band_id' => '1',
           'name' => 'name2',
           'year' => '2021',
           'times_sold' => '69',
@@ -30,6 +32,7 @@ class AlbumsTableSeeder extends Seeder
           'updated_at' => Carbon::now()
       ]);
       DB::table('albums')->insert([
+          'band_id' => '1',
           'name' => 'name3',
           'year' => '2021',
           'times_sold' => '69',
@@ -37,6 +40,7 @@ class AlbumsTableSeeder extends Seeder
           'updated_at' => Carbon::now()
       ]);
       DB::table('albums')->insert([
+          'band_id' => '1',
           'name' => 'name4',
           'year' => '2021',
           'times_sold' => '69',
@@ -44,6 +48,7 @@ class AlbumsTableSeeder extends Seeder
           'updated_at' => Carbon::now()
       ]);
       DB::table('albums')->insert([
+          'band_id' => '1',
           'name' => 'name5',
           'year' => '2021',
           'times_sold' => '69',

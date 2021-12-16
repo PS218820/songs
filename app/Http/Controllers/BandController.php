@@ -55,9 +55,9 @@ class BandController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($urlnaam)
+    public function show($urlidnaam)
     {
-        return view('bands.show', ['band' => Band::find($urlnaam)]);
+        return view('bands.show', ['band' => Band::find($id)]);
     }
 
     /**
@@ -66,9 +66,9 @@ class BandController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($urlnaam)
+    public function edit($id)
     {
-        return view('bands.edit', ['band' => Band::find($urlnaam)]);
+        return view('bands.edit', ['band' => Band::find($id)]);
     }
 
     /**

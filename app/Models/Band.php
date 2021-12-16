@@ -11,4 +11,14 @@ class Band extends Model
 
     protected $table = "bands";
     protected $fillable = ['name', 'genre', 'founded', 'active_til'];
+
+    /**
+    * Get the albums for the band.
+    */
+   public function albums()
+   {
+       return $this->hasMany(Album::class);
+   }
+
+
 }
